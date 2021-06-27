@@ -9,10 +9,13 @@ read_file_content(){
   sed 1d $1 | while IFS='\n' read line
   	do    
 		echo $line | while IFS=';' read NOME CIDADE CARGO
-	 do
- 		sudo userdel -r $NOME
-        	echo "Usuário "$NOME" Deletado!!!" 
-	 done
+	 	do
+			if sudo userdel -r $NOME; then
+		 		echo "Usuário "$NOME" Deletado!!!" 
+	 		else
+				echo "Erro ao deletar o usuário $NOME"
+			fi		
+		done
 	done
 }
 

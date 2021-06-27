@@ -10,8 +10,11 @@ read_file_content(){
   	do    
 		echo $line | while IFS=';' read NOME CIDADE CARGO
 	 do
- 		sudo adduser $NOME --gecos $CIDADE,$CARGO --ingroup usuarionovo --disabled-login
-        	echo  $NOME" "$CIDADE" "$CARGO 
+		if sudo adduser $NOME --gecos $CIDADE,$CARGO --ingroup usuarionovo --disabled-login; then
+			echo  $NOME" "$CIDADE" "$CARGO"--usuario criado"
+		else
+			echo "Erro ao criar o usuário $NOME"
+		fi	
 	 done
 	done
 }
